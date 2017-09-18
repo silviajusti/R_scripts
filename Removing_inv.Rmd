@@ -1,7 +1,7 @@
 
-#Removing invariant sites
-##Silvia Justi
-##9/18/2017
+#Removing invariant sites\
+##Silvia Justi\
+##9/18/2017\
 
 
 Using phrynomics to remove invariant sites from SNP alignments.\
