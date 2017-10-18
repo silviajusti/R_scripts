@@ -1,0 +1,54 @@
+---
+title: "Calculating and plotting pairwise distances in DNA alignments"
+author: "Silvia Justi"
+date: "10/3/2017"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+Setting  work directory
+```{r}
+setwd("/Users/silviajusti/Desktop")
+```
+
+
+Installing and Loading the necessary libraries
+```{r}
+#install.packages()
+library(ape)
+```
+
+
+Reading the fasta files. For this one I am using 5 random Hemitera 18S sequences. Sample names are GenBank access numbers
+```{r}
+data <-read.FASTA("sequence.fasta")
+data
+summary(data)
+
+```
+
+
+Calculating the pairwise k2p distances between samples and making sure they are returned as matrix, so we can plot the distances later and saving as tables
+```{r}
+dist <-dist.dna(data, model ="K80", as.matrix = TRUE, pairwise.deletion = T)
+summary(dist)
+
+```
+
+
+I am now ramdomly choosing a sample to compare to all others 
+```{r}
+sample <- subset(dist, select = c("KY554599"))
+
+```
+
+
+Ploting the distances between the chosen sample and the others
+```{r}
+sample_sorted <- as.matrix(sample[order(sample[,1]),])
+plot (sample_sorted, col = rgb(1,0.4,0), pch=18, main = "K2P distances", xaxt="n", xlab = "" , ylab="distance from KY554599")
+axis(1, at=1:5, labels = row.names(sample_sorted), las =2, cex.axis = 0.75)
+
+```
